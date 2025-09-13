@@ -38,15 +38,10 @@ export default function LoginPage() {
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
       
-      // Check if seller needs OTP verification
-      if (response.user.role === 'SELLER' && response.requiresOTP) {
-        // Redirect to OTP verification page for sellers
-        router.push(`/otp-verification?email=${encodeURIComponent(response.user.email)}`);
-      } else if (response.user.role === 'SELLER') {
-        // Seller already verified (shouldn't happen with new flow)
+      // Redirect based on user role
+      if (response.user.role === 'SELLER') {
         router.push('/seller-dashboard');
       } else {
-        // Regular users go to home page
         router.push('/');
       }
     } catch (error: unknown) {
