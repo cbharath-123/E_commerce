@@ -58,7 +58,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="flex items-center justify-between pt-3 border-t border-gray-100">
           <div className="flex items-center gap-2">
             <User size={16} className="text-gray-400" />
-            <span className="text-sm text-gray-600">{product.seller.name}</span>
+            <span className="text-sm text-gray-600">{product.seller?.name || 'Unknown Seller'}</span>
           </div>
           
           <button className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors">

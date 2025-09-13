@@ -30,16 +30,26 @@ export default function SellerProductList({ products, onProductUpdate }: SellerP
     }
 
     try {
-      // TODO: Replace with actual API call
-      // await fetch(`http://localhost:5000/api/products/${productId}`, {
-      //   method: 'DELETE',
-      //   headers: {
-      //     'Authorization': `Bearer ${localStorage.getItem('token')}`
-      //   }
-      // });
-      
-      console.log('Deleting product:', productId);
-      onProductUpdate();
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('You must be logged in to delete products');
+        return;
+      }
+
+      const response = await fetch(`http://localhost:5000/api/products/${productId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      console.log('Product deleted successfully');
+      onProductUpdate(); // Refresh the product list
     } catch (error) {
       console.error('Error deleting product:', error);
       alert('Failed to delete product. Please try again.');
@@ -85,8 +95,8 @@ export default function SellerProductList({ products, onProductUpdate }: SellerP
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {products.map((product) => (
-              <tr key={product.id} className="hover:bg-gray-50">
+            {products.map((product, index) => (
+              <tr key={`${product.id}-${index}`} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
                     <div className="flex-shrink-0 h-12 w-12">
@@ -163,8 +173,8 @@ export default function SellerProductList({ products, onProductUpdate }: SellerP
       {/* Mobile View */}
       <div className="md:hidden">
         <div className="space-y-4 p-4">
-          {products.map((product) => (
-            <div key={product.id} className="bg-gray-50 rounded-lg p-4">
+          {products.map((product, index) => (
+            <div key={`${product.id}-${index}`} className="bg-gray-50 rounded-lg p-4">
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
                   {product.image ? (

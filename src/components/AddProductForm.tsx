@@ -134,7 +134,7 @@ export default function AddProductForm({ onProductAdded, onCancel }: AddProductF
       
       // For now, create a mock product to show the UI working
       const mockProduct: Product = {
-        id: Date.now().toString(),
+        id: `mock-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         name: formData.name,
         description: formData.description,
         price: parseFloat(formData.price),
@@ -193,7 +193,7 @@ export default function AddProductForm({ onProductAdded, onCancel }: AddProductF
               value={formData.name}
               onChange={handleInputChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 font-medium"
               placeholder="Enter product name"
             />
           </div>
@@ -209,7 +209,7 @@ export default function AddProductForm({ onProductAdded, onCancel }: AddProductF
               value={formData.category}
               onChange={handleInputChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 font-medium"
             >
               <option value="">Select a category</option>
               {categories.map(cat => (
@@ -232,7 +232,7 @@ export default function AddProductForm({ onProductAdded, onCancel }: AddProductF
               min="0"
               step="0.01"
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 font-medium"
               placeholder="0.00"
             />
           </div>
@@ -250,7 +250,7 @@ export default function AddProductForm({ onProductAdded, onCancel }: AddProductF
               onChange={handleInputChange}
               min="0"
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 font-medium"
               placeholder="0"
             />
           </div>
@@ -268,7 +268,7 @@ export default function AddProductForm({ onProductAdded, onCancel }: AddProductF
             onChange={handleInputChange}
             required
             rows={4}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-vertical"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-vertical text-gray-900 font-medium"
             placeholder="Describe your product..."
           />
         </div>

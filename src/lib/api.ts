@@ -16,6 +16,9 @@ api.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      console.log('API Request: Token added to headers');
+    } else {
+      console.log('API Request: No token found in localStorage');
     }
   }
   return config;
@@ -107,6 +110,11 @@ export const authApi = {
 export const productsApi = {
   getAll: async (): Promise<Product[]> => {
     const response = await api.get('/api/products');
+    return response.data;
+  },
+
+  getSellerProducts: async (): Promise<Product[]> => {
+    const response = await api.get('/api/products/seller/my-products');
     return response.data;
   },
 
